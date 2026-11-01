@@ -1,0 +1,265 @@
+/* Шрифты хранятся в проекте: страница открывается и без интернета. */
+@font-face {
+  font-family: "Lovato";
+  src: url("assets/fonts/Lovato-Light-webfont.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Josefin Slab";
+  src: url("assets/fonts/josefinslab-bold-webfont.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --accent: #aa6666;
+  --accent-dark: #794343;
+  --page-padding: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  max-width: 1400px;
+  margin: 0 auto;
+  background: #fff;
+  color: #111;
+  font-family: "Lovato", Georgia, serif;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0.5px;
+  word-spacing: 3px;
+}
+
+h1,
+h2 {
+  font-family: "Josefin Slab", Georgia, serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  word-spacing: normal;
+}
+
+h1 {
+  margin: 32px 0;
+  font-size: 50px;
+  line-height: 1.2;
+}
+
+h2 {
+  margin: 25px 0;
+  font-size: 32px;
+  line-height: 38px;
+}
+
+p,
+main ul,
+aside ul,
+ol {
+  margin: 18px 0;
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent-dark);
+  outline-offset: 4px;
+}
+
+a:active {
+  color: var(--accent-dark);
+}
+
+.site-header,
+.site-footer {
+  padding: var(--page-padding);
+  border-block: 5px solid var(--accent);
+}
+
+.site-header {
+  text-align: center;
+}
+
+/* На большом экране — текст, курсы и меню в пропорции 50 / 30 / 20. */
+.page-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 3fr) minmax(0, 2fr);
+  grid-template-areas: "content courses navigation";
+  align-items: start;
+}
+
+.college-info {
+  grid-area: content;
+}
+
+.course-list {
+  grid-area: courses;
+}
+
+.college-info,
+.course-list {
+  min-width: 0;
+  padding: 0 var(--page-padding) var(--page-padding);
+}
+
+.intro {
+  text-indent: 20px;
+}
+
+.square-list {
+  padding-left: 40px;
+  list-style-type: square;
+}
+
+.next-steps {
+  padding-left: 40px;
+  list-style-type: lower-alpha;
+}
+
+.external-link {
+  white-space: nowrap;
+}
+
+.external-link::after {
+  content: "";
+  display: inline-block;
+  width: 0.85em;
+  height: 0.85em;
+  margin-left: 4px;
+  background: url("assets/external-link.svg") center / contain no-repeat;
+}
+
+.site-nav {
+  grid-area: navigation;
+  padding: var(--page-padding);
+}
+
+.site-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav a {
+  display: block;
+  border: 1px solid var(--accent);
+  padding: 22px 8px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 25px;
+  line-height: 31px;
+  word-spacing: normal;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible {
+  background: var(--accent);
+  color: #fff;
+}
+
+.site-nav a:active {
+  background: var(--accent-dark);
+}
+
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 1;
+  padding: 8px 16px;
+  background: #fff;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* Планшет: курсы переходят под основной текст, меню остаётся справа. */
+@media (max-width: 950px) {
+  h1 {
+    margin: 20px 0;
+    font-size: 44px;
+  }
+
+  .page-layout {
+    grid-template-columns: minmax(0, 1fr) 200px;
+    grid-template-areas:
+      "content navigation"
+      "courses navigation";
+  }
+
+  .course-list h2 {
+    margin-top: 0;
+  }
+}
+
+/* Телефон: меню под шапкой, затем текст и курсы в одну колонку. */
+@media (max-width: 725px) {
+  .site-header {
+    padding: 10px 25px;
+    border-bottom: 0;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(30px, 6vw, 44px);
+  }
+
+  h2 {
+    margin: 20px 0 10px;
+  }
+
+  .page-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "navigation"
+      "content"
+      "courses";
+  }
+
+  .site-nav {
+    padding: 4px 8px;
+    background: var(--accent);
+  }
+
+  .site-nav ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 0 12px;
+  }
+
+  .site-nav a {
+    padding: 5px 4px;
+    border: 0;
+    color: #fff;
+    font-size: 25px;
+    line-height: 34px;
+    text-decoration: underline;
+  }
+
+  .site-nav a:hover {
+    color: #111;
+  }
+
+  .site-nav a:focus-visible {
+    outline-color: #fff;
+    outline-offset: 0;
+  }
+}
